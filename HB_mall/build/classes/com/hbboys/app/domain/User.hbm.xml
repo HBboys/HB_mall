@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-17 18:43:57 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hbboys.app.domain.User" table="user" catalog="mall">
+        <id name="uid" type="java.lang.Integer">
+            <column name="uid" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" />
+        </property>
+        <property name="tel" type="string">
+            <column name="tel" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="isseller" type="java.lang.Integer">
+            <column name="isseller" />
+        </property>
+        <set name="goods" table="good" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sellerid" />
+            </key>
+            <one-to-many class="com.hbboys.app.domain.Good" />
+        </set>
+        <set name="orders" table="order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="buyerid" />
+            </key>
+            <one-to-many class="com.hbboys.app.domain.Order" />
+        </set>
+    </class>
+</hibernate-mapping>

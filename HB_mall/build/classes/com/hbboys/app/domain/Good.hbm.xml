@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-17 18:43:57 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hbboys.app.domain.Good" table="good" catalog="mall">
+        <id name="gid" type="int">
+            <column name="gid" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.hbboys.app.domain.User" fetch="select">
+            <column name="sellerid" />
+        </many-to-one>
+        <property name="gname" type="string">
+            <column name="gname" />
+        </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="count" />
+        </property>
+        <property name="timeonshelf" type="timestamp">
+            <column name="timeonshelf" length="19" />
+        </property>
+        <property name="category" type="string">
+            <column name="category" />
+        </property>
+        <set name="orders" table="order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="gid" />
+            </key>
+            <one-to-many class="com.hbboys.app.domain.Order" />
+        </set>
+    </class>
+</hibernate-mapping>

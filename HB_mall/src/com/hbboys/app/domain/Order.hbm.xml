@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-17 18:43:57 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.hbboys.app.domain.Order" table="order" catalog="mall">
+        <id name="orderid" type="int">
+            <column name="orderid" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="good" class="com.hbboys.app.domain.Good" fetch="select">
+            <column name="gid" />
+        </many-to-one>
+        <many-to-one name="user" class="com.hbboys.app.domain.User" fetch="select">
+            <column name="buyerid" />
+        </many-to-one>
+        <property name="time" type="timestamp">
+            <column name="time" length="19" />
+        </property>
+        <one-to-one name="comment" class="com.hbboys.app.domain.Comment"></one-to-one>
+    </class>
+</hibernate-mapping>
