@@ -8,8 +8,11 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.hbboys.app.util.HibernateUtil;
 import com.hbboys.app.domain.User;
+import com.hbboys.app.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -19,6 +22,14 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>{
 	 */
 	private static final long serialVersionUID = 1L;
 	private User user=new User();
+	@Autowired
+	private UserService userService;
+	public UserService getUserService() {
+		return userService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 	public User getUser() {
 		return user;
 	}
@@ -42,8 +53,12 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>{
 		}else{
 			this.addActionError("用户名或密码错误");
 			return "fail";
-		}
-		
+		}	
+	}
+	
+	public String register() {
+		userService.register(user);
+		return SUCCESS;
 	}
 	@Override
 	public User getModel() {

@@ -38,6 +38,10 @@ public class GoodAction extends ActionSupport implements ModelDriven<Good>{
 		this.goodService = goodService;
 	}
 
+	public GoodService getGoodService() {
+		return goodService;
+	}
+
 	public Good getGood() {
 		return good;
 	}
