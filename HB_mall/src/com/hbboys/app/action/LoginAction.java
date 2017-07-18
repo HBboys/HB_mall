@@ -2,12 +2,14 @@ package com.hbboys.app.action;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.hbboys.app.util.HibernateUtil;
-import com.hbboys.app.object.User;
+import com.hbboys.app.domain.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -29,6 +31,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>{
 		Query query  = session.createQuery("from User where username = ? and password = ?");
 		query.setString(0, user.getUsername());
 		query.setString(1, user.getPassword());
+		HttpSession session2=ServletActionContext.getRequest().getSession();
+		session2.setAttribute("uid", user.getUid());
 		@SuppressWarnings("unchecked")
 		List<User> list =query.list();
 		tran.commit();
